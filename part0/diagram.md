@@ -1,10 +1,40 @@
-# Mermaid test
-Here is a simple flow chart:
+# Mermaid-syntax diagram
+> A user creates a new note on the page https://studies.cs.helsinki.fi/exampleapp/notes by writing something into the text field and clicking the Save button.
 
-```mermaid
-graph TD;
-    A-->B;
-    A-->C;
-    B-->D;
-    C-->D;
-```
+Save button on the form is clicked:
+sequenceDiagram
+    participant browser
+    participant server
+
+    Note right of browser: The browser sends the user input to the server
+
+    browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note
+    activate server
+    server-->>browser: HTTP status code 302
+    deactivate server
+
+    Note left of server: The server accesses data that is sent as the body of the POST request. The server creates a new note object, and adds it to an array called notes. Each note object has two fields: content containing the actual content of the note, and date containing the date and time the note was created.
+
+    Note right of browser: The browser reloads the Notes page
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/notes
+    activate server
+    server-->>browser: HTML document
+    deactivate server
+ 
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.css
+    activate server
+    server-->>browser: the css file
+    deactivate server
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.js
+    activate server
+    server-->>browser: the JavaScript file
+    deactivate server
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
+    activate server
+    server-->>browser: [{ "content": "HTML is easy", "date": "2023-1-1" }, ... ]
+    deactivate server
+
+    Note left of server: The server does not save new notes to a database, so new notes disappear when the server is restarted.
