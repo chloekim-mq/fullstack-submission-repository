@@ -17,21 +17,14 @@ const Part = (props) => (
 
 const Total = (props) => <b>total of {props.total} exercises</b>
 
-const sumOfExercises = (parts) => {
-  let total = 0
-  for (let i = 0; i < parts.length; i++) {
-    total += parts[i].exercises
-  }
-  return total
-}
-
 const Course = ({course}) => {
+  const total = course.parts.reduce((sum, part) => sum + part.exercises, 0)
   return (
     <div>
       <h1>Half Stack application development</h1>
       <Header name={course.name} />
       <Content parts={course.parts} />
-      <Total total={sumOfExercises(course.parts)} />
+      <Total total={total} />
     </div>
   )
 }
