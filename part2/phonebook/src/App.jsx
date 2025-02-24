@@ -31,8 +31,11 @@ const App = () => {
       setNewNumber('')
   }
 
-  const handleFormChange = (event) => {
+  const handleNameChange = (event) => {
       setNewName(event.target.value)
+  }
+
+  const handleNumberChange = (event) => {
       setNewNumber(event.target.value)
   }
 
@@ -48,7 +51,7 @@ const App = () => {
       <h2>Phonebook</h2>
       <Filter filter={filter} handleFilterChange={handleFilterChange} />
       <h2>add a new</h2>
-      <PersonForm newName={newName} newNumber={newNumber} addPerson={addPerson} handleFormChange={handleFormChange} />
+      <PersonForm newName={newName} newNumber={newNumber} addPerson={addPerson} handleNameChange={handleNameChange} handleNumberChange={handleNumberChange} />
       <h2>Numbers</h2>
       <Persons filter={filter} persons={persons} />
     </div>
