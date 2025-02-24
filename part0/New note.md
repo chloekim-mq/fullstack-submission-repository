@@ -12,10 +12,12 @@ sequenceDiagram
 
     browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note
     activate server
-    server-->>browser: HTTP status code 302
+    server-->>browser: HTTP status code 302 Found
     deactivate server
 
-    Note left of server: The server accesses data (body of the POST request) then creates a new note object which is added to notes array.
+    Note left of server: The server accesses data (body of the POST request) then creates a new note object containing content and date
+
+    Note left of server: The note object is added to an array called notes
 
     Note right of browser: The browser reloads the Notes page
 
