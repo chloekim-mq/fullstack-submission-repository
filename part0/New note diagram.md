@@ -1,7 +1,6 @@
 # Mermaid-syntax diagram
 > A user creates a new note on the page https://studies.cs.helsinki.fi/exampleapp/notes by writing something into the text field and clicking the Save button.
 
-Save button on the form is clicked:
  ```mermaid
 sequenceDiagram
     participant browser
@@ -14,7 +13,7 @@ sequenceDiagram
     server-->>browser: HTTP status code 302
     deactivate server
 
-    Note left of server: The server accesses data that is sent as the body of the POST request. The server creates a new note object, and adds it to an array called notes. Each note object has two fields: content containing the actual content of the note, and date containing the date and time the note was created.
+    Note left of server: The server accesses data (body of the POST request) then creates a new note object which is added to notes array.
 
     Note right of browser: The browser reloads the Notes page
 
