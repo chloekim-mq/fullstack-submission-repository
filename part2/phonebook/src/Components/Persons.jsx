@@ -5,8 +5,8 @@ const Persons = ({ filter, persons, handleRemove }) => {
     return (
       <div>
         {personsToShow ?
-        persons.map(person => <p key={person.name}>{person.name} {person.number} <button onClick={() => handleRemove(person.id, person.name)}>Delete</button> </p>)
-        : filteredPersons.map(person => <p key={person.name}>{person.name} {person.number} <button onClick={handleClick}>Delete</button> </p>)}
+        persons.map(person => <p key={person.name}>{person.name} {person.number} <button onClick={() => handleRemove(person.id, person.name)}>delete</button> </p>)
+        : filteredPersons.map(person => <p key={person.name}>{person.name} {person.number} <button onClick={() => handleRemove(person.id, person.name)}>delete</button> </p>)}
       </div>
     )
   }

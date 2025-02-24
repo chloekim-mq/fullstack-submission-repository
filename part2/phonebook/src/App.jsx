@@ -21,27 +21,48 @@ const App = () => {
 
   const addPerson = (event) => {
       event.preventDefault()
+      
+      const existingPerson = persons.find(person => person.name === newName)
+      //if (persons.find(person => person.name === newName)) {
+          //alert(`${newName} is already added to phonebook`)
+          //return
+      //}
+      
+      if (existingPerson) {
+        const id = existingPerson.id
+        const updatedPerson = { ...existingPerson, number: newNumber }
 
-      if (persons.find(person => person.name === newName)) {
-          alert(`${newName} is already added to phonebook`)
-          return
+        if (window.confirm(`${newName} is already added to phonebook, replace the old number with a new one?`)) {
+        personService
+        .update(id, updatedPerson)
+        .then((returnedPerson) => {
+          setPersons((prevPersons) =>
+            prevPersons.map((person) =>
+              person.id !== id ? person : returnedPerson
+            )
+          )
+          setNewName('')
+          setNewNumber('')
+        })
       }
+      return;
+    }
 
-      const personObject = {
-          name: newName,
-          number: newNumber
-      }
+    const newPerson = {
+      name: newName,
+      number: newNumber
+  }
 
       personService
-      .create(personObject)
-      .then(returnedPerson => {
-          setPersons(persons.concat(returnedPerson))
+      .create(newPerson)
+      .then(person => {
+          setPersons(persons.concat(person))
           setNewName('')
           setNewNumber('')
       })
 
       axios
-      .post('http://localhost:3001/persons', personObject)
+      .post('http://localhost:3001/persons', newPerson)
       .then(response => {
           console.log(response)
       })
